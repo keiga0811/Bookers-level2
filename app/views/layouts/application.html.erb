@@ -10,6 +10,37 @@
   </head>
 
   <body>
+  <nav class="navi">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3 class="title">Bookers</h3>
+        </div>
+        <div class="col-lg-6">
+          <div class="nav">
+            <ul>
+              <% if user_signed_in? %>
+              　<li><%= link_to 'Home', user_path(current_user), class: 'glyphicon glyphicon-home home'%></li>
+                <li><%= link_to 'Users', users_path, class: 'glyphicon glyphicon-link about'%></li>
+                <li><%= link_to 'Books', books_path, class: 'glyphicon glyphicon-edit sign_up'%></li>
+                <li><%= link_to ' logout', destroy_user_session_path, method: :delete,class: 'glyphicon glyphicon-log-out logout' %></li>
+              <% else %>
+                <li><a class="glyphicon glyphicon-home home" href="/"> Home</a></li>
+                <li><a class="glyphicon glyphicon-link about" href="/homes/about"> About</a></li>
+                <li><a class="glyphicon glyphicon-edit sign_up" href="/users/sign_up"> sign up</a></li>
+                <li><a class="glyphicon glyphicon-log-in sign_in" href="/users/sign_in"> login</a></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
     <%= yield %>
+<div class="row">
+    <div class="col-md-3 col-md-offset-9">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+  </div>
   </body>
 </html>
