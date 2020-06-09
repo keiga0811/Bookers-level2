@@ -1,21 +1,51 @@
 <div class="container">
 	<div class="row">
 
-	  <%= render 'users/list', users:@users, book:@book %>
+	 	<div class="col-lg-3">
+			<h2>User info</h2>
+			<%= attachment_image_tag @user, :profile_image, :size => '100x100', fallback: "240ec862387d03003cb4c41cd93cb0be.png" %>
+			<table  class="table">
+				<tbody>
+					<tr>
+						<td>name</td>
+						<td><%= @user.name %></td>
+					</tr>
+					<tr>
+						<td>introduction</td>
+						<td><%= @user.introduction %></td>
+					</tr>
+				</tbody>
+			</table>
+			<%= link_to "編集", edit_user_path(current_user.id) %>
+
+			<h2>New book</h2>
+			<%= form_for(@book) do |f| %>
+			<p>Title</p>
+			<%= f.text_field :title %>
+			<p>Opinion</p>
+			<%= f.text_area :body %>
+			<%=f.submit "Create Book"%>
+			<% end %>
+		</div>
 
 		<div class="col-lg-9">
-			<table class="table table-striped">
+			<table class="table">
 				<h2>Books</h2>
 				<thead>
 					<tr>
+						<th></th>
 						<th>Title</th>
 						<th>Opinion</th>
 					</tr>
 				</thead>
 				<tbody>
+					<% @books.each do |book| %>
 					<tr>
-						<td></td>
+						<td><%= attachment_image_tag @user, :profile_image, :size =>'30x30', fallback: "240ec862387d03003cb4c41cd93cb0be.png" %></td>
+						<td><%= link_to book.title, book_path(book.id) %></td>
+						<td><%= book.body %></td>
 					</tr>
+					<% end %>
 				</tbody>
 			</table>
 		</div>

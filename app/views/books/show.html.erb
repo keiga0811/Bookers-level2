@@ -1,1 +1,47 @@
-<h1>show</h1>
+<div class="container">
+	<div class="row">
+
+	  	<div class="col-lg-3">
+			<h2>User info</h2>
+			<%= image_tag '240ec862387d03003cb4c41cd93cb0be.png', :size =>'100x100' %>
+			<table  class="table">
+				<tbody>
+					<tr>
+						<td>name</td>
+						<td><%= @user.name %></td>
+					</tr>
+					<tr>
+						<td>introduction</td>
+						<td><%= @user.introduction %></td>
+					</tr>
+				</tbody>
+			</table>
+			<%= link_to "編集", edit_user_path(current_user.id) %>
+
+			<h2>New book</h2>
+			<%= form_for(@book) do |f| %>
+			<p>Title</p>
+			<%= f.text_field :title %>
+			<p>Opinion</p>
+			<%= f.text_area :body %>
+			<%=f.submit "Create Book"%>
+			<% end %>
+	  	</div>
+
+		<div class="col-lg-9">
+			<table class="table table-striped">
+				<h2>Book detail</h2>
+				<tbody>
+					<tr>
+						<td><%= attachment_image_tag @user, :profile_image, :size => '50x50' %></td>
+						<td><%= link_to @user.name, user_path(@user.id) %></td>
+						<td><%= link_to @bookid.title, book_path(@bookid.id) %></td>
+						<td><%= @bookid.body %></td>
+						<td><%= link_to "Edit","#" %></td>
+						<td><%= link_to "Destroy",destroy_book_path(@bookid.id),method: :delete, "data-conrifm" => "本当に消しますか？" %></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
