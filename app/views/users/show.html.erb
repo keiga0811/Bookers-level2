@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 
-	 	<div class="col-lg-3">
+	 	<div class="col-xs-3">
 			<h2>User info</h2>
 			<%= attachment_image_tag @user, :profile_image, :size => '100x100', fallback: "240ec862387d03003cb4c41cd93cb0be.png" %>
 			<table  class="table">
@@ -16,7 +16,9 @@
 					</tr>
 				</tbody>
 			</table>
+			<% if @user == current_user %>
 			<%= link_to "編集", edit_user_path(current_user.id) %>
+			<% end %>
 
 			<h2>New book</h2>
 			<%= form_for(@book) do |f| %>
@@ -28,7 +30,7 @@
 			<% end %>
 		</div>
 
-		<div class="col-lg-9">
+		<div class="col-xs-9">
 			<table class="table">
 				<h2>Books</h2>
 				<thead>

@@ -20,7 +20,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    # @image = 
+    if @user != current_user
+    redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -30,8 +32,8 @@ class UsersController < ApplicationController
     redirect_to user_path(user.id)
     else
     flash[:notice] = "error"
-    render :index
     @user = User.find(params[:id])
+    render :edit
     end
   end
 

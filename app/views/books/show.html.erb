@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 
-	  	<div class="col-lg-3">
+	  	<div class="col-xs-3">
 			<h2>User info</h2>
 			<%= image_tag '240ec862387d03003cb4c41cd93cb0be.png', :size =>'100x100' %>
 			<table  class="table">
@@ -16,7 +16,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<%= link_to "編集", edit_user_path(current_user.id) %>
+			<%= link_to "編集", user_path(current_user.id) %>
 
 			<h2>New book</h2>
 			<%= form_for(@book) do |f| %>
@@ -28,17 +28,18 @@
 			<% end %>
 	  	</div>
 
-		<div class="col-lg-9">
+		<div class="col-xs-9">
 			<table class="table table-striped">
 				<h2>Book detail</h2>
 				<tbody>
 					<tr>
-						<td><%= attachment_image_tag @user, :profile_image, :size => '50x50' %></td>
-						<td><%= link_to @user.name, user_path(@user.id) %></td>
+						<td><%= attachment_image_tag @user, :profile_image, :size =>'30x30', fallback: "240ec862387d03003cb4c41cd93cb0be.png" %><br><%= link_to @user.name, user_path(@user.id) %></td>
 						<td><%= link_to @bookid.title, book_path(@bookid.id) %></td>
 						<td><%= @bookid.body %></td>
-						<td><%= link_to "Edit","#" %></td>
-						<td><%= link_to "Destroy",destroy_book_path(@bookid.id),method: :delete, "data-conrifm" => "本当に消しますか？" %></td>
+						<% if @bookid.user == current_user %>
+						<td><%= link_to "Edit",edit_book_path %></td>
+						<td><%= link_to "Destroy",book_path(@bookid.id),method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+						<% end %>
 					</tr>
 				</tbody>
 			</table>
